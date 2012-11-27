@@ -240,7 +240,7 @@ class FluentEvent
 		return $this;
 	}
 	
-	public function Geo($ip)
+	public function GeoFromIp($ip)
 	{
 		$this->Event->Ip = $ip;
 		return $this;
