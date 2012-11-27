@@ -239,6 +239,12 @@ class FluentEvent
 		$this->Event->Longitude = $lon;
 		return $this;
 	}
+	
+	public function Geo($ip)
+	{
+		$this->Event->Ip = $ip;
+		return $this;
+	}
 
 	public function DataType($datatype)
 	{
@@ -269,6 +275,7 @@ class Event
 	public $Tags;
 	public $Latitude;
 	public $Longitude;
+	public $Ip;
 	public $DataType = DataType::plaintext;
 }
 
@@ -311,8 +318,8 @@ class LogClient
 		if (isset($event->Link)) $res .= "&link=" . urlencode($event->Link);
 		if (isset($event->Value)) $res .= "&value=" . urlencode($event->Value);
 		if (isset($event->Tags)) $res .= "&tags=" . urlencode($event->Tags);
-		if (isset($event->Latitude)) $res .= "&lat=" . urlencode($event->Latitude);
-		if (isset($event->Longitude)) $res .= "&lon=" . urlencode($event->Longitude);
+		if (isset($event->Latitude) && isset($event->Longitude)) $res .= "&geo=" . urlencode($event->Latitude) . "," . urlencode($event->Longitude);
+		if (isset($event->Ip)) $res .= "&geo=ip:" . urlencode($event->Ip);
 		
 		if (isset($event->Data))
 		{
